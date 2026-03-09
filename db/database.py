@@ -2,7 +2,7 @@ import sqlite3
 from pathlib import Path
 import pandas as pd
 
-DB_FILE = Path(__file__).parent / "attendance.db"
+DB_FILE = Path("/tmp/attendance.db")
 
 def get_connection():
     return sqlite3.connect(DB_FILE)
