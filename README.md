@@ -1,6 +1,6 @@
 # 勤怠分析ダッシュボード
 
-CSVの勤怠データを分析するStreamlitアプリです。
+CSVの勤怠データを分析するStreamlitアプリです。<br>
 Excelで行われがちな勤怠分析を **Python + SQLite + Streamlit** で自動化しました。
 
 ## Demo
@@ -19,13 +19,13 @@ https://attendance-dashboard-39mfvauw28dn5q8h9wcjbt.streamlit.app/
 
 ## アーキテクチャ
 
-CSV
-↓
-pandas
-↓
-SQLite
-↓
-Streamlit Dashboard
+CSV<br>
+↓<br>
+pandas<br>
+↓<br>
+SQLite<br>
+↓<br>
+Streamlit Dashboard<br>
 
 ## 主な機能
 
@@ -42,10 +42,9 @@ Streamlit Dashboard
 Streamlitを使い残業状況をグラフで可視化します。
 
 ## 作成背景
-
-社内SEとして業務に関わる中で
-Excelによる手作業が多いことに課題を感じました。
-
-そのため
-Pythonとデータベースを用いて
-勤怠データを自動分析するツールを作成しました。
+社内SEとして業務に関わる中で<br>
+Excelによる手作業が多いことに課題を感じました。<br>
+<br>
+そのため<br>
+Pythonとデータベースを用いて<br>
+勤怠データを自動分析するツールを作成しました。<br>
