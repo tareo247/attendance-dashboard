@@ -90,3 +90,37 @@ def run():
         else:
             st.warning("長時間労働の可能性があります")
             st.dataframe(alert)
+
+    st.markdown("---")
+    # --------------------------
+    # CSVアップロード
+    # --------------------------
+    st.markdown("### サンプルデータ")
+
+    sample_attendance = pd.DataFrame({
+        "employee_id": ["A001", "A002", "A003"],
+        "date": ["2025-01-01", "2025-01-01", "2025-01-01"],
+        "start_time": ["09:00", "09:15", "08:45"],
+        "end_time": ["18:00", "19:00", "17:30"]
+    })
+
+    sample_department = pd.DataFrame({
+        "employee_id": ["A001", "A002", "A003"],
+        "department": ["Sales", "Engineering", "HR"]
+    })
+
+    st.download_button(
+        label="勤怠サンプルCSVダウンロード",
+        data=sample_attendance.to_csv(index=False),
+        file_name="sample_attendance.csv",
+        mime="text/csv"
+    )
+
+    st.download_button(
+        label="部署サンプルCSVダウンロード",
+        data=sample_department.to_csv(index=False),
+        file_name="sample_department.csv",
+        mime="text/csv"
+    )
+
+    st.markdown("---")
