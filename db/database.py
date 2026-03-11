@@ -9,6 +9,7 @@ else:
     DB_FILE = BASE_DIR / "attendance.db"
 
 def get_connection():
+    DB_FILE.parent.mkdir(parents=True, exist_ok=True)  # /tmp/ がなければ作成
     return sqlite3.connect(DB_FILE)
 
 def init_db():
