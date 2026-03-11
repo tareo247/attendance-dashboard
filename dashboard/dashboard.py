@@ -5,6 +5,9 @@ import db.database as db  # 先に database.py を準備している前提
 def run():
     st.title("勤怠分析ダッシュボード")
 
+    # DB初期化（テーブル作成）
+    db.init_db()
+
     # --------------------------
     # DBリセットボタン
     # --------------------------
@@ -30,31 +33,23 @@ def run():
     dep_file = st.file_uploader("部署CSVアップロード", type="csv")
 
     if att_file:
+        df_att = pd.read_csv(att_file)
         st.subheader("勤怠CSVプレビュー")
-        st.dataframe(pd.read_csv(att_file).head())
+        st.dataframe(df_att.head())
 
     if dep_file:
+        df_dep = pd.read_csv(dep_file)
         st.subheader("部署CSVプレビュー")
-        st.dataframe(pd.read_csv(dep_file).head())
+        st.dataframe(df_dep.head())
 
 
     if att_file and dep_file:
         if st.button("データ登録"):
-            try:
-                df_att = pd.read_csv(att_file)
-                df_dep = pd.read_csv(dep_file)
-            except Exception as e:
-                st.error(f"CSV読み込みエラー: {e}")
-
-            # DB初期化（テーブル作成）
-            db.init_db()
-
             # データ投入
             db.insert_attendance(df_att)
             db.insert_department(df_dep)
 
             st.success("データをDBに登録しました")
-            st.experimental_rerun()  # 画面を更新して再描画
 
         # --------------------------
         # データ取得・表示
@@ -93,19 +88,20 @@ def run():
 
     st.markdown("---")
     # --------------------------
-    # CSVアップロード
+    # サンプルCSVダウンロード
     # --------------------------
     st.markdown("### サンプルデータ")
 
     sample_attendance = pd.DataFrame({
-        "employee_id": ["A001", "A002", "A003"],
+        "employee_id": ["001", "002", "003"],
         "date": ["2025-01-01", "2025-01-01", "2025-01-01"],
         "start_time": ["09:00", "09:15", "08:45"],
-        "end_time": ["18:00", "19:00", "17:30"]
+        "end_time": ["18:00", "19:00", "17:30"],
+        "work_hours": ["9", "9.45", "8.75"]
     })
 
     sample_department = pd.DataFrame({
-        "employee_id": ["A001", "A002", "A003"],
+        "employee_id": ["001", "002", "003"],
         "department": ["Sales", "Engineering", "HR"]
     })
 
@@ -122,5 +118,3 @@ def run():
         file_name="sample_department.csv",
         mime="text/csv"
     )
-
-    st.markdown("---")

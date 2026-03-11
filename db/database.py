@@ -1,8 +1,12 @@
 import sqlite3
 from pathlib import Path
-import pandas as pd
+import os
 
-DB_FILE = Path("/tmp/attendance.db")
+if os.getenv("STREAMLIT_RUNTIME"):
+    DB_FILE = Path("/tmp/attendance.db")
+else:
+    BASE_DIR = Path(__file__).resolve().parent
+    DB_FILE = BASE_DIR / "attendance.db"
 
 def get_connection():
     return sqlite3.connect(DB_FILE)
